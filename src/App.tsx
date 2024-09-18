@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import CharactersPage from './pages/Characters';
+import Details from './pages/Details';
+import RecoidContextProvider from './recoilProvider';
+import Locations from './pages/Locations';
+import LocationCharacters from './pages/LocationCharacters';
+import { ToastContainer } from 'react-toastify';
 
-function App() {
+function AppRouter() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer />
+      <RecoidContextProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<CharactersPage />} />
+            <Route path="/details/:id" element={<Details />} />
+            <Route path="/locations" element={<Locations />} />
+            <Route path="/locations/:name" element={<LocationCharacters />} />
+          </Routes>
+        </Router>
+      </RecoidContextProvider>
+    </>
   );
 }
 
-export default App;
+export default AppRouter;
